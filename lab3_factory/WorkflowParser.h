@@ -17,7 +17,6 @@ class WorkflowParser
 	void FillComandList();
 	void FillComandSequence();
 	std::vector<std::string> FindInstruction(std::string id);
-	
 public:
 	std::list<std::pair<std::string, std::vector<std::string>>> GetBlocks(std::string file_name);
 };

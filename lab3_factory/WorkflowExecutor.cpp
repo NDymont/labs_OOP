@@ -1,6 +1,6 @@
 #include "WorkflowExecutor.h"
 
-bool WorkflowExecutor::ChekBlocksType(std::list<std::pair<Block*, std::vector<std::string>>>& block_objects)
+bool WorkflowExecutor::ChekBlocksType(std::list<std::pair<std::shared_ptr<Block>, std::vector<std::string>>>& block_objects)
 {
 	int number_blocks = block_objects.size();
 	int i = 1;
@@ -36,20 +36,11 @@ void WorkflowExecutor::ExecuteWorkflow(std::string file_name)
 {
 	WorkflowParser parser;
 	auto blocks = parser.GetBlocks(file_name);
-	std::list <std::pair<Block*, std::vector<std::string>>> block_objects;
-	Maker maker;
-	try
+	std::list <std::pair<std::shared_ptr<Block>, std::vector<std::string>>> block_objects;
+	for (auto block : blocks)
 	{
-		for (auto block : blocks) //перебираем все блоки и превратить описание блока в класс, который блок реализует
-		{
-			Block* block_object = maker.GetBlock(block.first);
-			block_objects.emplace_back(block_object, block.second);
-		}
-	}
-	catch (const std::exception& ex)
-	{
-		maker.~Maker();
-		throw ex;
+		Block* block_object = Maker::Instance().GetBlock(block.first);
+		block_objects.emplace_back(block_object, block.second);
 	}
 	if (!ChekBlocksType(block_objects))
 	{

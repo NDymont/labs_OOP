@@ -1,12 +1,22 @@
 #include "Grep.h"
+#include "Maker.h"
+
+namespace {
+	bool RegisterFactory() {
+		static GrepFactory f;
+		Maker::Instance().RegisterMaker("grep", &f);
+		return true;
+	}
+	bool fake = RegisterFactory();
+}
 
 uint Grep::number_arguments()
 {
 	return 1;
 }
+
 std::list<std::string> Grep::execute(std::list<std::string>& text, const std::vector<std::string>& args)
 {
-	std::cout << "GREP\n";
 	if (number_arguments() != args.size())
 	{
 		throw MyException("incorrect number of arguments in block Grep");
@@ -21,6 +31,7 @@ std::list<std::string> Grep::execute(std::list<std::string>& text, const std::ve
 	}
 	return new_text;
 }
+
 BlockType Grep::GetType()
 {
 	return BlockType::INOUT;

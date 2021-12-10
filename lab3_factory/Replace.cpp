@@ -1,4 +1,14 @@
 #include "Replace.h"
+#include "Maker.h"
+
+namespace {
+	bool RegisterFactory() {
+		static ReplaceFactory f;
+		Maker::Instance().RegisterMaker("replace", &f);
+		return true;
+	}
+	bool fake = RegisterFactory();
+}
 
 uint Replace::number_arguments() 
 {
@@ -7,7 +17,6 @@ uint Replace::number_arguments()
 
 std::list<std::string> Replace::execute(std::list<std::string>& text, const std::vector<std::string>& args)
 {
-	std::cout << "REPLACE\n";
 	if (number_arguments() != args.size())
 	{
 		throw MyException("incorrect number of arguments in block Replace");

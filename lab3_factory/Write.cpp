@@ -1,12 +1,22 @@
 #include "Write.h"
+#include "Maker.h"
+
+namespace {
+	bool RegisterFactory() {
+		static WriteFactory f;
+		Maker::Instance().RegisterMaker("writefile", &f);
+		return true;
+	}
+	bool fake = RegisterFactory();
+}
 
 uint Write:: number_arguments() 
 {
 	return 1;
 }
+
 std::list<std::string> Write::execute(std::list<std::string>& text, const std::vector<std::string>& args)
 {
-	std::cout << "WRITE\n";
 	if (number_arguments() != args.size())
 	{
 		throw MyException("incorrect number of arguments in block Write");
@@ -24,6 +34,7 @@ std::list<std::string> Write::execute(std::list<std::string>& text, const std::v
 	output.close();
 	return text;
 }
+
 BlockType Write::GetType()
 {
 	return BlockType::OUT;
