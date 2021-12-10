@@ -1,0 +1,9 @@
+desc
+1 = readfile input.txt
+2 = writefile out.txt
+3 = sort
+5 = replace aa ddddd
+17 = dump dump.txt
+10 = grep bb
+csed
+1 -> 3 -> 17 -> 5 -> 10 -> 2 -> 3
