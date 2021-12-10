@@ -1,5 +1,10 @@
 #include"Maker.h"
 
+Maker& Maker::Instance()
+{
+	static Maker m;
+	return m;
+}
 void Maker::RegisterMaker(const std::string& key, BlockFactory* maker)
 {
 	if (makers.find(key) != makers.end())

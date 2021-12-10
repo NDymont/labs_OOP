@@ -2,14 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include "Block.h"
+#include "Output.h"
 #include "BlockFactory.h"
 #include "MyException.h"
 
 
-class Dump : public Block
+class Dump : public Output
 {
-	uint number_arguments() override;
-	std::list<std::string> execute(std::list<std::string>& text, const std::vector<std::string>& args) override;
 	BlockType GetType() override;
 };
 

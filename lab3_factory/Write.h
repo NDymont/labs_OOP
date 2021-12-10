@@ -1,15 +1,14 @@
 #pragma once
 #include <iostream>
 #include "Block.h"
+#include "Output.h"
 #include "BlockFactory.h"
 #include "MyException.h"
 #include <fstream>
 
 
-class Write : public Block
+class Write : public Output
 {
-	uint number_arguments() override;
-	std::list<std::string> execute(std::list<std::string>& text, const std::vector<std::string>& args) override;
 	BlockType GetType() override;
 };
 

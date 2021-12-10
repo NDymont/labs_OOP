@@ -13,11 +13,9 @@
 class Maker
 {
 	std::map<std::string, BlockFactory*> makers;
+	Maker() {}
 public:
-	static Maker& Instance() {
-		static Maker m;
-		return m;
-	}
+	static Maker& Instance();
 	void RegisterMaker(const std::string& key, BlockFactory* maker);
 	Block* GetBlock(std::string& key);
 };
