@@ -45,6 +45,7 @@ public class ReadFile {
                 buffer.setLength(0);
             }
         }
+        fileInputStream.close();
         addWord(String.valueOf(buffer));
         buffer.setLength(0);
     }
