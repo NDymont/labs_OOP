@@ -1,16 +1,16 @@
 package com.company;
 
-import words.ReadFile;
-import words.WriteCSVFile;
+import words.WordStatisticRecoderFromFile;
+import words.WriterCSVFile;
 
 import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        ReadFile file = new ReadFile();
-        file.fileToSet("input.txt");
-        WriteCSVFile write = new WriteCSVFile("out.csv");
-        write.writeCSVFile(file.getWordCounter(), file.getTotalNumberOfWords());
+        WordStatisticRecoderFromFile file = new WordStatisticRecoderFromFile();
+        file.recordWordFrequency("input.txt");
+        WriterCSVFile write = new WriterCSVFile();
+        write.writeCSVFile("out.csv", file.getWordFrequencies(), file.getTotalNumberOfWords());
     }
 }
