@@ -34,13 +34,12 @@ public class WordStatisticRecoderFromFile {
 
     public void recordWordFrequency(String fileName) throws IOException {
 
-        FileInputStream fileInputStream = null;
+        BufferedInputStream bufferedInputStream = null;
         try {
-            fileInputStream = new FileInputStream(fileName);
+            bufferedInputStream = new BufferedInputStream(new FileInputStream(fileName), 200);
         } catch (FileNotFoundException exception) {
             System.out.println(exception.getMessage());
         }
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream, 200);
         StringBuilder buffer = new StringBuilder("");
         int i;
         try {
@@ -55,7 +54,7 @@ public class WordStatisticRecoderFromFile {
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         } finally {
-            fileInputStream.close();
+            bufferedInputStream.close();
         }
         addWord(String.valueOf(buffer));
         buffer.setLength(0);

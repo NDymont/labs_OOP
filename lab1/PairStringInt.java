@@ -29,6 +29,9 @@ public class PairStringInt implements Comparable<PairStringInt> {
 
     @Override
     public int compareTo(PairStringInt other) {
+        if (this.first.equals(other.first)) {
+            return this.second.compareTo(other.second);
+        }
         return this.first.compareTo(other.first);
     }
 

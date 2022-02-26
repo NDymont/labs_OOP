@@ -7,6 +7,7 @@ public class FrequencyWordSorter {
     private TreeSet<PairStringInt> wordCounterSorted;
 
     public FrequencyWordSorter(TreeSet<PairStringInt> wordCounter) {
+
         Comparator comparator = new Comparator<PairStringInt>() {
             @Override
             public int compare(PairStringInt o1, PairStringInt o2) {
@@ -17,10 +18,8 @@ public class FrequencyWordSorter {
             }
         };
 
-        wordCounterSorted = new TreeSet<>(comparator);
-        for (PairStringInt it : wordCounter) {
-            wordCounterSorted.add(it);
-        }
+        wordCounterSorted = new TreeSet<PairStringInt>(comparator);
+        wordCounterSorted.addAll(wordCounter);
     }
 
     public TreeSet<PairStringInt> getWordCounterSorted() {
