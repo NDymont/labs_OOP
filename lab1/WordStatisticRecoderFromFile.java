@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedInputStream;
+import java.util.Collection;
 import java.util.TreeSet;
 
 public class WordStatisticRecoderFromFile {
@@ -15,7 +16,7 @@ public class WordStatisticRecoderFromFile {
         totalNumberOfWords = 0;
     }
 
-    public TreeSet<PairStringInt> getWordFrequencies() {
+    public Collection<PairStringInt> getWordFrequencies() {
         return wordCounter;
     }
 
