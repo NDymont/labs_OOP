@@ -13,26 +13,21 @@ public class Multiply implements Operation {
 
     private static final Logger log = Logger.getLogger(Multiply.class.getName());
 
-    @Override
-    public int getNumberOfArguments() {
-        return 0;
-    }
-
-    @Override
-    public int getNumberOfRequiredValues() {
-        return 2;
-    }
+    private final int numberOfArguments = 0;
+    private final int numberOfRequiredValues = 2;
 
     @Override
     public void execute(ContextCalculator contextCalculator, List<String> arguments) throws IncorrectNumberOfArgumentsException, NotEnoughDataInStackException {
 
-        ArgumentCountChecker argumentCountChecker = new ArgumentCountChecker();
-        argumentCountChecker.checkNumberOfArguments(arguments.size(), getNumberOfArguments(), this.getClass().getSimpleName());
-        argumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), getNumberOfRequiredValues(), this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfArguments(arguments.size(), numberOfArguments, this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), numberOfRequiredValues, this.getClass().getSimpleName());
+
         double arg1 = contextCalculator.pop();
         double arg2 = contextCalculator.pop();
         double result = arg1 * arg2;
-        log.log(Level.INFO, String.format("%s * %s = %s", arg1, arg2, result));
+        if (log.isLoggable(Level.INFO)) {
+            log.log(Level.INFO, String.format("%s * %s = %s", arg1, arg2, result));
+        }
         contextCalculator.push(result);
         contextCalculator.push(result);
     }

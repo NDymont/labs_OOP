@@ -3,23 +3,22 @@ package calculator;
 import javafx.util.Pair;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Workflow {
+    private static final Logger log = Logger.getLogger(Workflow.class.getName());
     private Queue<Pair<String, List<String>>> commandExecutionQueue;
 
     public Workflow() {
         commandExecutionQueue = new LinkedList<Pair<String, List<String>>>();
         String line;
         Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNextLine())
-        {
+        while (scanner.hasNextLine()) {
             line = scanner.nextLine();
             List<String> words = getListWordsFromString(line);
             String comand = words.get(0);
@@ -28,12 +27,29 @@ public class Workflow {
         }
     }
 
-    public Workflow(String fileName) throws IOException {
+    public Workflow(String fileName) throws InitializationException {
         commandExecutionQueue = new LinkedList<Pair<String, List<String>>>();
-        FileReader fileReader = new FileReader(fileName);
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            InitializationException exception = new InitializationException(e);
+            log.log(Level.SEVERE, "", exception);
+            throw exception;
+        }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while (true) {
+            try {
+                line = bufferedReader.readLine();
+            } catch (IOException e) {
+                InitializationException exception = new InitializationException(e);
+                log.log(Level.SEVERE, "", exception);
+                throw exception;
+            }
+            if (line == null) {
+                break;
+            }
             List<String> words = getListWordsFromString(line);
             String comand = words.get(0);
             words.remove(0);

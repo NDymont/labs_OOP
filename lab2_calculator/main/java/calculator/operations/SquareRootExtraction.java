@@ -9,22 +9,15 @@ import java.util.logging.Logger;
 public class SquareRootExtraction implements Operation {
     private static final Logger log = Logger.getLogger(SquareRootExtraction.class.getName());
 
-    @Override
-    public int getNumberOfArguments() {
-        return 0;
-    }
-
-    @Override
-    public int getNumberOfRequiredValues() {
-        return 1;
-    }
+    private final int numberOfArguments = 0;
+    private final int numberOfRequiredValues = 1;
 
     @Override
     public void execute(ContextCalculator contextCalculator, List<String> arguments)
             throws ExtractingRootFromNegativeException, IncorrectNumberOfArgumentsException, NotEnoughDataInStackException {
-        ArgumentCountChecker argumentCountChecker = new ArgumentCountChecker();
-        argumentCountChecker.checkNumberOfArguments(arguments.size(), getNumberOfArguments(), this.getClass().getSimpleName());
-        argumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), getNumberOfRequiredValues(), this.getClass().getSimpleName());
+
+        ArgumentCountChecker.checkNumberOfArguments(arguments.size(), numberOfArguments, this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), numberOfRequiredValues, this.getClass().getSimpleName());
 
         double value = contextCalculator.pop();
         if (value < 0) {
@@ -35,6 +28,8 @@ public class SquareRootExtraction implements Operation {
         }
         double sqrtValue = Math.sqrt(value);
         contextCalculator.push(sqrtValue);
-        log.log(Level.INFO, String.format("sqrt(%s) = %s", value, sqrtValue));
+        if (log.isLoggable(Level.INFO)) {
+            log.log(Level.INFO, String.format("sqrt(%s) = %s", value, sqrtValue));
+        }
     }
 }

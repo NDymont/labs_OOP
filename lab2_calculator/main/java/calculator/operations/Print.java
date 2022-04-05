@@ -13,25 +13,19 @@ public class Print implements Operation {
 
     private static final Logger log = Logger.getLogger(Print.class.getName());
 
-    @Override
-    public int getNumberOfArguments() {
-        return 0;
-    }
-
-    @Override
-    public int getNumberOfRequiredValues() {
-        return 1;
-    }
+    private final int numberOfArguments = 0;
+    private final int numberOfRequiredValues = 1;
 
     @Override
     public void execute(ContextCalculator contextCalculator, List<String> arguments)
             throws IncorrectNumberOfArgumentsException, NotEnoughDataInStackException {
-        ArgumentCountChecker argumentCountChecker = new ArgumentCountChecker();
-        argumentCountChecker.checkNumberOfArguments(arguments.size(), getNumberOfArguments(), this.getClass().getSimpleName());
-        argumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(),
-                getNumberOfRequiredValues(), this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfArguments(arguments.size(), numberOfArguments, this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), numberOfRequiredValues, this.getClass().getSimpleName());
+
         double value = contextCalculator.getTop();
         System.out.println(value);
-        log.log(Level.INFO, String.format("value %s was printed", value));
+        if (log.isLoggable(Level.INFO)) {
+            log.log(Level.INFO, String.format("value %s was printed", value));
+        }
     }
 }

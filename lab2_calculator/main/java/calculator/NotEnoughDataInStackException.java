@@ -1,6 +1,6 @@
 package calculator;
 
-public class NotEnoughDataInStackException extends Exception {
+public class NotEnoughDataInStackException extends ExecutionExcepiton {
 
     public NotEnoughDataInStackException(int stackSize, int numberOfRequiredValues, String className) {
         super(String.format("There is not enough data in the stack.\n" +

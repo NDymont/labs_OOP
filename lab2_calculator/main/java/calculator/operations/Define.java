@@ -1,10 +1,6 @@
 package calculator.operations;
 
-import calculator.ArgumentCountChecker;
-import calculator.ContextCalculator;
-import calculator.IncorrectNameOfParameterException;
-import calculator.IncorrectNumberOfArgumentsException;
-import calculator.IncorrectTypeOfArgumentException;
+import calculator.*;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -13,22 +9,13 @@ import java.util.logging.Logger;
 public class Define implements Operation {
     private static final Logger log = Logger.getLogger(Define.class.getName());
 
-    @Override
-    public int getNumberOfArguments() {
-        return 2;
-    }
-
-    @Override
-    public int getNumberOfRequiredValues() {
-        return 0;
-    }
+    private final int numberOfArguments = 2;
 
     @Override
     public void execute(ContextCalculator contextCalculator, List<String> arguments)
             throws IncorrectNumberOfArgumentsException, IncorrectNameOfParameterException, IncorrectTypeOfArgumentException {
 
-        ArgumentCountChecker argumentCountChecker = new ArgumentCountChecker();
-        argumentCountChecker.checkNumberOfArguments(arguments.size(), getNumberOfArguments(), this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfArguments(arguments.size(), numberOfArguments, this.getClass().getSimpleName());
 
         StringBuffer parameterName = new StringBuffer(arguments.get(0));
         if (!Character.isLetter(parameterName.charAt(0))) {
@@ -46,6 +33,8 @@ public class Define implements Operation {
             throw exception;
         }
         contextCalculator.putParameter(parameterName.toString(), parameterValue);
-        log.log(Level.INFO, String.format("Parameter %s was defined by the value %s", parameterName, parameterValue));
+        if (log.isLoggable(Level.INFO)) {
+            log.log(Level.INFO, String.format("Parameter %s was defined by the value %s", parameterName, parameterValue));
+        }
     }
 }

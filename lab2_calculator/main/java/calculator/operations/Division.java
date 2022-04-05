@@ -13,23 +13,16 @@ import java.util.logging.Logger;
 public class Division implements Operation {
     private static final Logger log = Logger.getLogger(Division.class.getName());
 
+    private final int numberOfArguments = 0;
 
-    @Override
-    public int getNumberOfArguments() {
-        return 0;
-    }
-
-    @Override
-    public int getNumberOfRequiredValues() {
-        return 2;
-    }
+    private final int numberOfRequiredValues = 2;
 
     @Override
     public void execute(ContextCalculator contextCalculator, List<String> arguments)
             throws DivisionByZeroException, IncorrectNumberOfArgumentsException, NotEnoughDataInStackException {
-        ArgumentCountChecker argumentCountChecker = new ArgumentCountChecker();
-        argumentCountChecker.checkNumberOfArguments(arguments.size(), getNumberOfArguments(), this.getClass().getSimpleName());
-        argumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), getNumberOfRequiredValues(), this.getClass().getSimpleName());
+
+        ArgumentCountChecker.checkNumberOfArguments(arguments.size(), numberOfArguments, this.getClass().getSimpleName());
+        ArgumentCountChecker.checkNumberOfValues(contextCalculator.getSizeOfStack(), numberOfRequiredValues, this.getClass().getSimpleName());
 
         double divisible = contextCalculator.pop();
         double divisor = contextCalculator.pop();
@@ -43,6 +36,8 @@ public class Division implements Operation {
         }
         double result = divisible / divisor;
         contextCalculator.push(result);
-        log.log(Level.INFO, String.format("%s / %s = %s", divisible, divisor, result));
+        if (log.isLoggable(Level.INFO)) {
+            log.log(Level.INFO, String.format("%s / %s = %s", divisible, divisor, result));
+        }
     }
 }
