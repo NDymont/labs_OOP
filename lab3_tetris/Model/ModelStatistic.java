@@ -13,9 +13,7 @@ public class ModelStatistic {
     private static FileWriter writer;
     private static FileReader reader;
 
-    //    public ModelStatistic () {
-//        sortedMap = new HashMap<String, Integer>();
-//    }
+
     public static HashMap<String, Integer> getSortedMap() throws IOException {
         try {
             reader = new FileReader("resources/statistic.txt");
@@ -25,18 +23,15 @@ public class ModelStatistic {
             String name1 = null;
             int size = 0;
             while (scanner.hasNext()) {
-                //k = 0;
+
                 s = scanner.next();
-                // System.out.println(s);
                 if (k == 0) {
                     name1 = s;
-                    //System.out.println("s" + name1);
                 }
                 if (k == 1) {
                     try {
                         size = Integer.valueOf(s);
                         sortedMap.put(name1, size);
-                        //System.out.println(size);
                         k = 0;
                         continue;
                     } catch (NumberFormatException error) {
@@ -55,7 +50,6 @@ public class ModelStatistic {
         writer.write(name + " " + lines + "\n");
         writer.close();
         sortedMap.put(name, lines);
-        //System.out.println(sortedMap.size());
         HashMap<String, Integer> map = sortedMap.entrySet().stream()
                 .sorted(Comparator.comparingInt(e -> -e.getValue()))
                 .collect(Collectors.toMap(

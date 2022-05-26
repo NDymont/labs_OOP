@@ -184,11 +184,6 @@ public class Model {
                     rects.add((Rectangle) pane.getChildren().get(i));
                 }
             }
-
-//                for (Node node : pane.getChildren()) {
-//                    if (node instanceof Rectangle)
-//                        rects.add(node);
-//                }
             linesNo++;
 
             for (Rectangle node : rects) {
@@ -210,10 +205,6 @@ public class Model {
             lines.remove(0);
             rects.clear();
             newrects.clear();
-//                for (Node node : pane.getChildren()) {
-//                    if (node instanceof Rectangle)
-//                        rects.add(node);
-//                }
             for (int i = 0; i < pane.getChildren().size(); ++i) {
                 if (pane.getChildren().get(i) instanceof Rectangle) {
                     rects.add((Rectangle) pane.getChildren().get(i));
