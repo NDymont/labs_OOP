@@ -18,8 +18,8 @@ import static tetris.View.Constants.*;
 public class Controller {
     private static final int FORM_FIRST = 1;
     private static final int FORM_SECOND = 2;
-    private static final int FORM_3 = 3;
-    private static final int FORM_LAST = 4;
+    private static final int FORM_THIRD = 3;
+    private static final int FORM_FOURTH = 4;
     private static final int FORM_NULL = 0;
     private static final int FORM_NULL_1 = -1;
     private static final int FORM_NULL_2 = -2;
@@ -31,7 +31,7 @@ public class Controller {
     }
 
     public static void nullingArray() {
-        for (int[] a : Model.MESH) {
+        for (int[] a : Model.playingField) {
             Arrays.fill(a, FORM_NULL);
         }
     }
@@ -125,11 +125,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_NULL_2, FORM_SECOND)) {
             turningShapeOneFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_FIRST, FORM_FIRST, FORM_FIRST, FORM_SECOND, FORM_SECOND)) {
             turningShapeOneFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_FIRST, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_SECOND, FORM_NULL_2)) {
             turningShapeOneFormFour(form);
         }
@@ -145,11 +145,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_SECOND, FORM_NULL_2, FORM_FIRST, FORM_NULL_1)) {
             turningShapeTwoFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_FIRST, FORM_NULL_1, FORM_NULL_1, FORM_NULL_2, FORM_NULL_2)) {
             turningShapeTwoFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_FIRST, FORM_FIRST, FORM_NULL_2, FORM_SECOND, FORM_NULL_1, FORM_FIRST)) {
             turningShapeTwoFormFour(form);
         }
@@ -165,11 +165,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_FIRST, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_NULL, FORM_NULL_2)) {
             turningShapeFourFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_NULL, FORM_SECOND)) {
             turningShapeFourFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_FIRST, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_NULL, FORM_NULL_2)) {
             turningShapeFourFormFour(form);
         }
@@ -184,11 +184,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_FIRST, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_FIRST, FORM_FIRST)) {
             turningShapeFiveFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_FIRST, FORM_FIRST, FORM_NULL_1)) {
             turningShapeFiveFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_NULL_1, FORM_NULL_1)) {
             turningShapeFiveFormFour(form);
         }
@@ -204,11 +204,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_NULL_1, FORM_SECOND, FORM_NULL)) {
             turningShapeSixFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_FIRST, FORM_NULL_2, FORM_NULL)) {
             turningShapeSixFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_NULL_1, FORM_SECOND, FORM_NULL)) {
             turningShapeSixFormFour(form);
         }
@@ -223,11 +223,11 @@ public class Controller {
                 getForm(a, b, c, d, FORM_NULL_2, FORM_NULL_2, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_FIRST)) {
             turningShapeSevenFormTwo(form);
         }
-        if (f == FORM_3 &&
+        if (f == FORM_THIRD &&
                 getForm(a, b, c, d, FORM_SECOND, FORM_SECOND, FORM_FIRST, FORM_FIRST, FORM_NULL_1, FORM_NULL_1)) {
             turningShapeSevenFormThree(form);
         }
-        if (f == FORM_LAST &&
+        if (f == FORM_FOURTH &&
                 getForm(a, b, c, d, FORM_NULL_2, FORM_NULL_2, FORM_NULL_1, FORM_NULL_1, FORM_FIRST, FORM_FIRST)) {
             turningShapeSevenFormFour(form);
         }

@@ -11,7 +11,7 @@ import static tetris.Model.ConstantsModel.*;
 import static tetris.View.Constants.*;
 
 public class Model {
-    public static int[][] MESH = new int[XMAX / SIZE][YMAX / SIZE];
+    public static int[][] playingField = new int[XMAX / SIZE][YMAX / SIZE];
     private static int linesNo = 0;
 
     public static GenerationFigure makeRect() {
@@ -84,10 +84,10 @@ public class Model {
         try {
             if (form.square1.getX() + MOVE <= XMAX - SIZE && form.square2.getX() + MOVE <= XMAX - SIZE
                     && form.square3.getX() + MOVE <= XMAX - SIZE && form.square4.getX() + MOVE <= XMAX - SIZE) {
-                int movea = MESH[((int) form.square1.getX() / SIZE) + OFFSET_RIGHT][((int) form.square1.getY() / SIZE)];
-                int moveb = MESH[((int) form.square2.getX() / SIZE) + OFFSET_RIGHT][((int) form.square2.getY() / SIZE)];
-                int movec = MESH[((int) form.square3.getX() / SIZE) + OFFSET_RIGHT][((int) form.square3.getY() / SIZE)];
-                int moved = MESH[((int) form.square4.getX() / SIZE) + OFFSET_RIGHT][((int) form.square4.getY() / SIZE)];
+                int movea = playingField[((int) form.square1.getX() / SIZE) + OFFSET_RIGHT][((int) form.square1.getY() / SIZE)];
+                int moveb = playingField[((int) form.square2.getX() / SIZE) + OFFSET_RIGHT][((int) form.square2.getY() / SIZE)];
+                int movec = playingField[((int) form.square3.getX() / SIZE) + OFFSET_RIGHT][((int) form.square3.getY() / SIZE)];
+                int moved = playingField[((int) form.square4.getX() / SIZE) + OFFSET_RIGHT][((int) form.square4.getY() / SIZE)];
                 if (movea == 0 && movea == moveb && moveb == movec && movec == moved) {
                     form.square1.setX(form.square1.getX() + MOVE);
                     form.square2.setX(form.square2.getX() + MOVE);
@@ -103,10 +103,10 @@ public class Model {
         try {
             if (form.square1.getX() - MOVE >= END_FIELD && form.square2.getX() - MOVE >= END_FIELD &&
                     form.square3.getX() - MOVE >= END_FIELD && form.square4.getY() - MOVE >= END_FIELD) {
-                int maovea = MESH[((int) form.square1.getX()) / SIZE - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
-                int maoveb = MESH[((int) form.square2.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
-                int maovec = MESH[((int) form.square3.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
-                int maoved = MESH[((int) form.square4.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
+                int maovea = playingField[((int) form.square1.getX()) / SIZE - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
+                int maoveb = playingField[((int) form.square2.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
+                int maovec = playingField[((int) form.square3.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
+                int maoved = playingField[((int) form.square4.getX() / SIZE) - OFFSET_LEFT][(int) form.square1.getY() / SIZE];
                 if (maovea == END_FIELD && maoveb == END_FIELD && maovec == END_FIELD && maoved == END_FIELD) {
                     form.square1.setX(form.square1.getX() - MOVE);
                     form.square2.setX(form.square2.getX() - MOVE);
@@ -123,19 +123,19 @@ public class Model {
             if (form.square1.getY() == YMAX - SIZE || form.square2.getY() == YMAX - SIZE ||
                     form.square3.getY() == YMAX - SIZE || form.square4.getY() == YMAX - SIZE || moveA(form) || moveB(form)
                     || moveC(form) || moveD(form)) {
-                MESH[((int) form.square1.getX()) / SIZE][((int) form.square1.getY()) / SIZE] = NOT_EMPTY_PLACE;
-                MESH[((int) form.square2.getX()) / SIZE][((int) form.square2.getY()) / SIZE] = NOT_EMPTY_PLACE;
-                MESH[((int) form.square3.getX()) / SIZE][((int) form.square3.getY()) / SIZE] = NOT_EMPTY_PLACE;
-                MESH[((int) form.square4.getX()) / SIZE][((int) form.square4.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                playingField[((int) form.square1.getX()) / SIZE][((int) form.square1.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                playingField[((int) form.square2.getX()) / SIZE][((int) form.square2.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                playingField[((int) form.square3.getX()) / SIZE][((int) form.square3.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                playingField[((int) form.square4.getX()) / SIZE][((int) form.square4.getY()) / SIZE] = NOT_EMPTY_PLACE;
                 removeRows(group);
                 Controller.generationNewRect();
             }
             if (form.square1.getY() + MOVE < YMAX && form.square2.getY() + MOVE < YMAX && form.square3.getY() + MOVE < YMAX
                     && form.square4.getY() + MOVE < YMAX) {
-                int movea = MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT];
-                int moveb = MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT];
-                int movec = MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT];
-                int moved = MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT];
+                int movea = playingField[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT];
+                int moveb = playingField[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT];
+                int movec = playingField[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT];
+                int moved = playingField[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT];
                 if (movea == 0 && movea == moveb && moveb == movec && movec == moved) {
                     form.square1.setY(form.square1.getY() + MOVE);
                     form.square2.setY(form.square2.getY() + MOVE);
@@ -149,19 +149,19 @@ public class Model {
     }
 
     private static boolean moveA(GenerationFigure form) {
-        return (MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
+        return (playingField[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveB(GenerationFigure form) {
-        return (MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
+        return (playingField[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveC(GenerationFigure form) {
-        return (MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
+        return (playingField[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveD(GenerationFigure form) {
-        return (MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
+        return (playingField[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static void removeRows(Pane pane) {
@@ -169,12 +169,12 @@ public class Model {
         ArrayList<Integer> lines = new ArrayList<Integer>();
         ArrayList<Rectangle> newrects = new ArrayList<Rectangle>();
         int full = 0;
-        for (int i = 0; i < MESH[0].length; i++) {
-            for (int j = 0; j < MESH.length; j++) {
-                if (MESH[j][i] == 1)
+        for (int i = 0; i < playingField[0].length; i++) {
+            for (int j = 0; j < playingField.length; j++) {
+                if (playingField[j][i] == 1)
                     full++;
             }
-            if (full == MESH.length)
+            if (full == playingField.length)
                 lines.add(i);
             full = 0;
         }
@@ -189,7 +189,7 @@ public class Model {
             for (Rectangle node : rects) {
                 Rectangle a = node;
                 if (a.getY() == lines.get(0) * SIZE) {
-                    MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
+                    playingField[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
                     pane.getChildren().remove(node);
                 } else
                     newrects.add(node);
@@ -198,7 +198,7 @@ public class Model {
             for (Rectangle node : newrects) {
                 Rectangle a = node;
                 if (a.getY() < lines.get(0) * SIZE) {
-                    MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
+                    playingField[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
                     a.setY(a.getY() + SIZE);
                 }
             }
@@ -213,7 +213,7 @@ public class Model {
             for (Rectangle node : rects) {
                 Rectangle a = node;
                 try {
-                    MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 1;
+                    playingField[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 1;
                 } catch (ArrayIndexOutOfBoundsException e) {
                 }
             }
@@ -236,7 +236,7 @@ public class Model {
             yb = rect.getY() - y * MOVE > 0;
         if (y < 0)
             yb = rect.getY() + y * MOVE < YMAX;
-        return xb && yb && MESH[((int) rect.getX() / SIZE) + x][((int) rect.getY() / SIZE) - y] == 0;
+        return xb && yb && playingField[((int) rect.getX() / SIZE) + x][((int) rect.getY() / SIZE) - y] == 0;
     }
 
     public static int getLinesNo() {

@@ -33,8 +33,8 @@ public class TetrisView implements View {
     private static final int TOP_EXIT = 5;
     private static final int GAME_X = 10;
     private static final int GAME_Y = 250;
-    private static int lines;
-    private boolean game;
+    private static int score;
+    private boolean gameOn;
     private static GenerationFigure nextObj = Controller.createFigure();
     private final Stage stage;
     private int top;
@@ -44,9 +44,8 @@ public class TetrisView implements View {
         top = NULL_SET;
         group.getChildren().clear();
         this.stage = stage;
-        this.game = true;
-        lines = NULL_SET;
-
+        this.gameOn = true;
+        score = NULL_SET;
     }
 
     public void start() throws Exception {
@@ -54,7 +53,7 @@ public class TetrisView implements View {
         ImageView img = new ImageView(image);
         img.setFitWidth(FIELD_WIDTH);
         img.setFitHeight(FIELD_HEIGHT);
-        setLine();
+        setScore();
         setLevel();
         group.getChildren().add(img);
         group.getChildren().addAll(line, level);
@@ -85,17 +84,15 @@ public class TetrisView implements View {
                             gameOver.setY(GAME_Y);
                             gameOver.setStyle("-fx-font: 70 arial;");
                             group.getChildren().add(gameOver);
-                            game = false;
+                            gameOn = false;
                         }
                         if (top == TOP_EXIT) {
                             Controller.returnMenu(stage);
                         }
-                        if (game) {
+                        if (gameOn) {
                             Controller.doDown(object, group);
-                            lines = Model.getLine();
-                            level.setText("Lines: " + lines);
-                        } else {
-
+                            score = Model.getLine();
+                            level.setText("Score: " + score);
                         }
                     }
                 });
@@ -112,13 +109,13 @@ public class TetrisView implements View {
         Controller.moveOnKeyPress(a, scene, group);
     }
 
-    private void setLine() {
+    private void setScore() {
         line = new Line(XMAX, NULL_SET, XMAX, YMAX);
         line.setStroke(Color.WHITE);
     }
 
     private void setLevel() {
-        level = new Text("Lines: ");
+        level = new Text("Score: ");
         level.setStyle("-fx-font: 20 arial;");
         level.setY(LEVEL_Y);
         level.setX(XMAX + LEVEL_X);

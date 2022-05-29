@@ -16,7 +16,8 @@ public class ModelStatistic {
 
     public static HashMap<String, Integer> getSortedMap() throws IOException {
         try {
-            reader = new FileReader("resources/statistic.txt");
+            reader = new FileReader("statistic.txt");
+
             Scanner scanner = new Scanner(reader);
             String s;
             int k = 0;
@@ -46,7 +47,7 @@ public class ModelStatistic {
         reader.close();
         int lines = Model.getLine();
         String name = RegistrationView.getName();
-        writer = new FileWriter("resources/statistic.txt");
+        writer = new FileWriter("statistic.txt");
         writer.write(name + " " + lines + "\n");
         writer.close();
         sortedMap.put(name, lines);
