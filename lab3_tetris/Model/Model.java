@@ -15,13 +15,14 @@ public class Model {
     private static int linesNo = 0;
 
     public static GenerationFigure makeRect() {
-        int block = (int) (Math.random() * ALIGMENT);
+        int block = (int) (Math.random() * 7);
         String name;
         Rectangle a = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
                 b = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
                 c = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
                 d = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT);
-        if (block < FORM_ONE) {
+
+        if (block == FORM_ONE) {
             a.setX(XMAX / HALF - SIZE);
             b.setX(XMAX / HALF - SIZE);
             b.setY(SIZE);
@@ -30,7 +31,7 @@ public class Model {
             d.setX(XMAX / HALF + SIZE);
             d.setY(SIZE);
             name = SHAPE_ONE;
-        } else if (block < FORM_TWO) {
+        } else if (block == FORM_TWO) {
             a.setX(XMAX / HALF + SIZE);
             b.setX(XMAX / HALF - SIZE);
             b.setY(SIZE);
@@ -39,7 +40,7 @@ public class Model {
             d.setX(XMAX / HALF + SIZE);
             d.setY(SIZE);
             name = SHAPE_TWO;
-        } else if (block < FORM_THREE) {
+        } else if (block == FORM_THREE) {
             a.setX(XMAX / HALF - SIZE);
             b.setX(XMAX / HALF);
             c.setX(XMAX / HALF - SIZE);
@@ -47,7 +48,7 @@ public class Model {
             d.setX(XMAX / HALF);
             d.setY(SIZE);
             name = SHAPE_THREE;
-        } else if (block < FORM_FOUR) {
+        } else if (block == FORM_FOUR) {
             a.setX(XMAX / HALF + SIZE);
             b.setX(XMAX / HALF);
             c.setX(XMAX / HALF);
@@ -55,14 +56,14 @@ public class Model {
             d.setX(XMAX / HALF - SIZE);
             d.setY(SIZE);
             name = SHAPE_FOUR;
-        } else if (block < FORM_FIVE) {
+        } else if (block == FORM_FIVE) {
             a.setX(XMAX / HALF - SIZE);
             b.setX(XMAX / HALF);
             c.setX(XMAX / HALF);
             c.setY(SIZE);
             d.setX(XMAX / HALF + SIZE);
             name = SHAPE_FIVE;
-        } else if (block < FORM_SIX) {
+        } else if (block == FORM_SIX) {
             a.setX(XMAX / HALF + SIZE);
             b.setX(XMAX / HALF);
             c.setX(XMAX / HALF + SIZE);
